@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>🤓Rares Extraits </title>
+</head>
+
+  <body>
+    <nav id="navbar">
+        <header style="text-transform:uppercase;">Rares extraits 🔎</header>
+        <ul>
+          <li><a class="nav-link" href="#Redes_Inalambricas">Redes Inalambricas</a></li>
+        
+        </ul>
+      </nav>
+      
+      <main id="main-doc">
+        
+        <img class="banner" src="baneer.jpg" alt="">
+        
+        <section class="main-section" id="Redes_Inalambricas">
+          <header>Redes Inalambricas</header>
+          <article>
+            <h3>Interfaces de Red</h3>
+            <p>
+              Las interfaces de red permiten a cualquier servidor que ejecute el servicio enrutamiento y acceso remoto comunicarse con otros equipos a través de redes privadas o públicas. 
+            </p>
+            <h3>Tarjetas de Red</h3>
+            <p>
+              La tarjeta de red, también conocida como placa de red, adaptador de red, adaptador LAN, Interfaz de red física.
+            </p>
+            <h3>Direccion IP Privada /Publica</h3>
+            <h4>IP Privada</h4>
+            <p>
+              Una dirección IP Privada se utiliza para identificar equipos o dispositivos dentro de una red doméstica o privada.
+
+              Las direcciones IP Privadas sí pueden repetirse pero en redes distintas, en cuyo caso no habrá conflictos debido a que las redes se encuentran separadas.
+            </p>
+            <h4>IP Publica</h4>
+            <p>
+              La dirección IP Pública es aquella que nos ofrece el proveedor de acceso a Internet y se asigna a cualquier equipo o dispositivo conectado de forma directa a Internet.
+              Las direcciones IP Públicas son siempre únicas.
+            </p>
+            <h3>Direccion MAC</h3>
+            <p>
+              Es un identificador de 48 bits (6 bloques de dos caracteres hexadecimales [8 bits]) que corresponde de forma única a una tarjeta o dispositivo de red.
+              En nuestro caso la direccion de la MAC sera cambiada.
+            </p>
+       
+          </article>
+          <!-- Vulnerabilidad de redes -->
+          <!-- ModoMonitor -->
+          <h2>Redes WPA/WPA2</h2>
+          <p> <strong>Nota </strong> la tarjeta que se pondra de  ejemplo es la interna de una laptop y es llamada en mi caso <strong>wlan0</strong>.</p>
+          <article>
+            <h3>Configurando en Modo Monitor</h3>
+            
+            <p>1.Listar las interfaz de red existentes.</p>
+            <code>ifconfig</code>
+            <p>2.Seleccionar el nombre y configura en modo monitor con</p> <code>airmon-ng start &lt;wlan0 &gt;</code>
+            <img src="./wifi/inicio.png" alt="before">
+            <p> 3.Observar que la interfaz seleccionada a desaparecido o ha cambiado. </p>
+             <img src="./wifi/inicio2.png" alt="after">
+           
+            <p>4.Listamos la informa sobre la configuración de red inalámbrica <code>iwconfig</code> y observarmos que aparece nuestra interfaz seleccionada en modo monitor.</p>
+            <img src="./wifi/modomonitor.png" alt="change_mon">
+            <p>5.Configurado en modo monitor volvemos a levantar la interfaz <code>ifconfig &lt;wlan0&gt; up </code>.</p>
+            <h3>Deshabilitar modo monitor</h3>
+            Detenemos el modo monitor
+            <code>airmon-ng stop &lt;wlan0&gt;</code>
+            y verificamos.
+            <code>ifconfig</code>
+            <h3>Kill procesos conflictivos</h3>
+            <code>Killall dhclient wpa_suplicant 2>/dev/null</code>
+            <code>airmon-ng check kill</code>
+            <h3>Conectarse a la red</h3>
+            <p>Es aconsejable reiniciar el servicio.</p>
+            <code>/etc/init.d/networking restart</code>
+          </article>
+          <!-- MAC Address Spoofing -->
+          <h2>Cambiar nuestra direccion MAC </h2>
+          <article>
+            <h3>Macchanger</h3>
+            <p>1.Revisamos cual es nuetra direccion MAC.</p>
+            <code>macchanger -s &lt;wlan0&gt; #-s=show</code>
+            <p>Los primeros tres bloques son importantes identifica la tecnologia del dispositivo.</p>
+            <img src="./wifi/MAC.png" alt="MoreInfo">
+            <p>2.Listamos OUI's.</p>
+            <code>macchanger -l | grep "P.."</code>
+            <img src="./wifi/owis.png" alt="ouis">
+            <p>3.Realizamos los cambios.</p>
+            <code>macchanger --mac=&lt;oui selecionada&gt;:da:af:91   &lt;wlan0&gt;</code> 
+            <img src="./wifi/macrename2.png" alt="try">
+            <p><strong>Nota :</strong> UAA puede ser aleatoria pero en Hexadecimal</p>
+           <p> Para cambiar la direccion de mac la interfaz en modo monitor debe estar detenida posteriormente la levantamos.</p>
+           <img src="./wifi/changemac.png" alt="changemac">
+          </article>
+           <!--Aircrack-ng -->
+           <h2>Aircrack-ng</h2>
+           <article>
+             <p>1.Tratamos de capturar tebniendo nuestra interfaz levantada en modo monitor.</p>
+             <code>airodump-ng  &lt;wlan0&gt; </code>
+             <img src="./wifi/scanedports.png" alt="">
+             <p>Podemos Filtra puntos de acceso y clientes</p>
+             <p>BSSID direccion MAC del AP</p>
+            <p>PWR nivel de señal,-1 no hay señal</p>
+            <p>Beacons nro de packetes de anuncios</p>
+            <p>Data nro packetes capturados</p>
+            <p>CH  Chanek Canales</p>
+            <p>CIPHER Tipos de cifrados</p>
+            <p>AUTH</p>
+            <p>ESSID Nombre de la red inalambrica</p>
+
+           </article>
+        </section>
+        
+        
+
+      </main>
+</body>
+
+</html>
