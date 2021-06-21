@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@1,200&display=swap" rel="stylesheet">
     <title>🤓Rares Extraits </title>
 </head>
 
@@ -13,14 +15,16 @@
         <header style="text-transform:uppercase;">Rares extraits 🔎</header>
         <ul>
           <li><a class="nav-link" href="#Redes_Inalambricas">Redes Inalambricas</a></li>
-        
+          <li><a class="nav-link" href="#DetecciondeIntrusos">Deteccion de Intrusos</a></li>
+          <li><a class="nav-link" href="#Shodan">Busquedas con Shodan</a></li>
+          
         </ul>
       </nav>
       
       <main id="main-doc">
         
         <img class="banner" src="baneer.jpg" alt="">
-        
+        <!-- post1 -->
         <section class="main-section" id="Redes_Inalambricas">
           <header>Redes Inalambricas</header>
           <article>
@@ -60,26 +64,30 @@
             
             <p>1.Listar las interfaz de red existentes.</p>
             <code>ifconfig</code>
-            <p>2.Seleccionar el nombre y configura en modo monitor con</p> <code>airmon-ng start &lt;wlan0 &gt;</code>
+          
+            <h3>Kill procesos conflictivos</h3>
+            <code>Killall dhclient wpa_suplicant 2>/dev/null</code>
+            <code>airmon-ng check kill</code>
+            <p>2.Habiendo matado los procesos seleccionar el nombre y configura en modo monitor con</p> <code>airmon-ng start &lt;wlan0 &gt;</code>
             <img src="./wifi/inicio.png" alt="before">
+           
+            <code>ifconfig</code>
             <p> 3.Observar que la interfaz seleccionada a desaparecido o ha cambiado. </p>
              <img src="./wifi/inicio2.png" alt="after">
            
             <p>4.Listamos la informa sobre la configuración de red inalámbrica <code>iwconfig</code> y observarmos que aparece nuestra interfaz seleccionada en modo monitor.</p>
             <img src="./wifi/modomonitor.png" alt="change_mon">
-            <p>5.Configurado en modo monitor volvemos a levantar la interfaz <code>ifconfig &lt;wlan0&gt; up </code>.</p>
+            <p>5.Configurado en modo monitor volvemos a levantar la interfaz <code>ifconfig &lt;wlan0&gt; up </code></p>
             <h3>Deshabilitar modo monitor</h3>
-            Detenemos el modo monitor
-            <code>airmon-ng stop &lt;wlan0&gt;</code>
-            y verificamos.
+   <p>         Detenemos el modo monitor
+    <code>airmon-ng stop &lt;wlan0&gt;</code>
+    y verificamos.</p>
             <code>ifconfig</code>
-            <h3>Kill procesos conflictivos</h3>
-            <code>Killall dhclient wpa_suplicant 2>/dev/null</code>
-            <code>airmon-ng check kill</code>
-            <h3>Conectarse a la red</h3>
-            <p>Es aconsejable reiniciar el servicio.</p>
+          
+            <h3>Conectarse a la red de Internet</h3>
+            <p>Es aconsejable reiniciar el servicio y reiniciar el computador.</p>
             <code>/etc/init.d/networking restart</code>
-          </article>
+          </article> 
           <!-- MAC Address Spoofing -->
           <h2>Cambiar nuestra direccion MAC </h2>
           <article>
@@ -99,26 +107,112 @@
            <img src="./wifi/changemac.png" alt="changemac">
           </article>
            <!--Aircrack-ng -->
-           <h2>Aircrack-ng</h2>
+           <h2>Airodump-ng</h2>
            <article>
-             <p>1.Tratamos de capturar tebniendo nuestra interfaz levantada en modo monitor.</p>
+             <p>1.Tratamos de capturar teniendo nuestra interfaz levantada en modo monitor.</p>
              <code>airodump-ng  &lt;wlan0&gt; </code>
              <img src="./wifi/scanedports.png" alt="">
              <p>Podemos Filtra puntos de acceso y clientes</p>
-             <p>BSSID direccion MAC del AP</p>
-            <p>PWR nivel de señal,-1 no hay señal</p>
-            <p>Beacons nro de packetes de anuncios</p>
-            <p>Data nro packetes capturados</p>
-            <p>CH  Chanek Canales</p>
-            <p>CIPHER Tipos de cifrados</p>
-            <p>AUTH</p>
-            <p>ESSID Nombre de la red inalambrica</p>
-
-           </article>
+             <p><i>BSSID</i> direccion MAC del AP</p>
+            <p><i>PWR</i> nivel de señal,-1 no hay señal</p>
+            <p><i>Beacons</i> nro de packetes de anucios</p>
+            <p><i>#Data</i> nro packetes capturados</p>
+            <p>  <i>#/s </i> nro de paquetes de datos capturados por segundo calculando la media de los últimos 10 segundos.</p>
+             <p> <i>CH </i>  Número de canal (obtenido de los “paquetes anuncio” o beacons).</p>
+            <p> <i>CIPHER</i> Tipos de cifrados</p>
+            <p> <i>AUTH</i> protocolo de autenticación usado.</p>
+            <p> <i>ESSID</i> Nombre de la red inalambrica</p>
+            </article>
+            <!-- MODOS DE FILTRO -->
+            <h3>Modos de Filtro</h3>
+            <article>
+              <p>Escogemos filtrar por el nombre de la red "ESSID" tambien llamada "SSID".</p>
+              <code>airodump-ng -c 1 --bssid F8:E8:11:1F:D3:68 &lt;wlan0&gt;</code>
+              Guardando las redes.
+              <p>Se adiciona el -w para capturar los datos es importante para un Handshake.</p>
+              <img src="./wifi/saved.png" alt="">
+              <code>airodump-ng -c 10 -w captura --bssid &lt;::::::&gt; wlan0</code>
+            </article>
+            <!-- AICRACK DEAUTH AND AUTH -->
+            <h3> Aireplay-ng </h3>
+            <strong>Desautenticacion</strong><p>Se trata de denegar los servicios (DoS),desautenticamos los packetes que debian ser injectados en la red mediante la prevencion de la coneccion del cliente al AP.</p>
+            <code>aireplay-ng -0 10  -e &lt;E..L&gt;  -c &lt; &gt; wlan0 </code>
+            <code>aireplay-ng -0 10 -e bssid  -c FF:FF:FF:FF:FF:FF wlan0</code>
+             
+            
         </section>
-        
-        
+        <!-- post2 -->
+        <section class="main-section" id="DetecciondeIntrusos">
+            <header>Deteccion de Intrusos</header>
+            <article>
+                <h3>Patrones</h3>
+                <p>son sucesos recurrentes. </p>
+                <h3>Paquetes?</h3>
+                <p>Se tiene un proceso de Envio,esta pasa por capas que van encapsulando ,se adicionan a la cabecera de protocolo del Paquete.</p>
+                <img src="./paquetes/tcpip.jpg" alt="">
+                <h3>Wireshark</h3>
+                <p>Es una herramienta de analisis sobre paquetes.</p>
+                <h3>¿Que es un IDS?</h3>
+                <p>Son llamados los sistemas de Deteccion de Intruosos son herramientas,
+                  estas aumentan la seguridad en las redes,estos por si solos no pueden detener a los intrusos ,necesitan  tener una configuracion conjunta con el Firewall,para entender es una ids debemos saber que es un log.</p>
+                <h3>¿Que es un log?</h3>
+                <p>Es un registro que deja un sistema informativo,ejemplo:  accesos de usuarios y borrados,puedes visalizarlos en /var/log en hay se encuentran todos los logs de Sistema . </p>
+                <h3>Tipos de IDS</h3>
+                <h4>HIDS(Host  IDS)</h4>
+                <p>Deteccion basada en host de un maquina.</p>
+                <h4>NIDS(Network IDS)</h4>
+                <p>Monitoreo de la red</p>
+                <h3>IPS</h3>
+                <p>Sistema de Prevencion de Intrusion,ejerce el control de acceso a una red.</p>
 
+            </article>
+        </section>
+        <!-- post3 -->
+        <section class="main-section" id="Shodan">
+          <header>Shodam atemorizada 😱 </header>
+           <p style="font-family: 'Bitter', serif;">21/06/21</p>
+          <article>
+            <h3>Intro 🎤 </h3>
+            <p>Es un Search Engine como google o big pero puede brindarnos informacion
+              de puertos ,controladores ,lugares publicos los cuales tal vez se descubran  vunerabilidades en ellas.
+            </p>
+            <p>Shodan brinda informacion de de todo aparato conectado a  un red como una pc hasta un controlador de una empresa.</p>
+            <h3>Aplicacion 🔍</h3>
+            <li><strong>Seguridad  de redes</strong>
+              Es utilizado para investigaciones de  Seguridad.
+              <a href=""></a></li>
+            <li><strong>Investigacion de Mercado </strong>
+              <br>
+             El proposito de Shodan  al comienzo fue del ser un motor de Market Research por que este es muy distinto a los demas como google ,¿Está encontrando computadoras que ejecutan una determinada pieza de software (como Apache)? ¿O si desea saber qué versión de Microsoft IIS es la más popular? ¿O quiere ver cuántos servidores FTP anónimos hay? ¿Quizás surgió una nueva vulnerabilidad y desea ver cuántos hosts podría infectar? Los motores de búsqueda web tradicionales no le permiten responder esas preguntas ".
+             </li>
+             <li>
+              <strong >Internet de las Cosas</strong>
+              <p>Aparte de la  webcam existen otros aparatos que deberian tener normas de regulacion para la seguridad de los propietarios. <a href="https://www.zdnet.com/article/shodan-the-iot-search-engine-which-shows-us-sleeping-kids-and-how-we-throw-away-our-privacy/">Mirando a niños que duermen</a></p>
+            </li>
+            <li><strong>Inspeccion de Ransomware</strong>
+            Shodan tambien esta del lado el bien. <a href="https://cso.computerworld.es/actualidad/el-buscador-shodan-tumba-una-red-de-bots">Shodan tumba una red de `bots´</a> </li>
+            <li><strong>Ciber Risk</strong>
+            <a href="https://www.washingtonpost.com/investigations/cyber-search-engine-exposes-vulnerabilities/2012/06/03/gJQAIK9KCV_story.html">Exponiendo a sistemas de Industrias</a>
+            </li>
+            <h3>TOP en Busquedas   🆒 </h3>
+            <p>
+              - Webcam <br>
+              - Cams <br>
+              - Netcam <br>
+              - Defaultpassword <br>
+              - Ufanet <br>
+                *:80;*:8080;
+              - Dreambox <br>
+              - Live sex cam <br>
+              - Webcamxp <br>
+              - Webcam no pass <br>
+              - MayGion IP cameras (admin:admin) <br>
+            </p>
+           
+          </article>
+        </section>
+
+     
       </main>
 </body>
 
