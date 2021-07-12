@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@1,200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@1,200&display=swap" rel="stylesheet">
     <title>🤓Rares Extraits </title>
 </head>
 
@@ -17,203 +17,373 @@
           <li><a class="nav-link" href="#Redes_Inalambricas">Redes Inalambricas</a></li>
           <li><a class="nav-link" href="#DetecciondeIntrusos">Deteccion de Intrusos</a></li>
           <li><a class="nav-link" href="#Shodan">Busquedas con Shodan</a></li>
-          
+          <li><a class="nav-link" href="#WindowsPEF"> Windows Privilege Escalation Fundamentals</a> </li>
+          <li><a class="nav-link" href="#RegexBash"> Regex & Bash </a></li>
+          <li><a class="nav-link" href="#WindowsPrivileges"> Windows Privileges </a></li>
+          <li><a class="nav-link" href="#SFB">Seguridad Forense Basica</a></li>
+          <li><a class="nav-link" href="#Kerberos">Kerberos</a></li>
         </ul>
       </nav>
       
       <main id="main-doc">
         
         <img class="banner" src="baneer.jpg" alt="">
-        <!-- post1 -->
-        <section class="main-section" id="Redes_Inalambricas">
-          <header>Redes Inalambricas</header>
-          <article>
-            <h3>Interfaces de Red</h3>
-            <p>
-              Las interfaces de red permiten a cualquier servidor que ejecute el servicio enrutamiento y acceso remoto comunicarse con otros equipos a través de redes privadas o públicas. 
-            </p>
-            <h3>Tarjetas de Red</h3>
-            <p>
-              La tarjeta de red, también conocida como placa de red, adaptador de red, adaptador LAN, Interfaz de red física.
-            </p>
-            <h3>Direccion IP Privada /Publica</h3>
-            <h4>IP Privada</h4>
-            <p>
-              Una dirección IP Privada se utiliza para identificar equipos o dispositivos dentro de una red doméstica o privada.
+    <!-- post1 -->
+    <section class="main-section" id="Redes_Inalambricas">
+      <header>Redes Inalambricas</header>
+      <article>
+        <h3>Interfaces de Red</h3>
+        <p>
+          Las interfaces de red permiten a cualquier servidor que ejecute el servicio enrutamiento y acceso remoto comunicarse con otros equipos a través de redes privadas o públicas. 
+        </p>
+        <h3>Tarjetas de Red</h3>
+        <p>
+          La tarjeta de red, también conocida como placa de red, adaptador de red, adaptador LAN, Interfaz de red física.
+        </p>
+        <h3>Direccion IP Privada /Publica</h3>
+        <h4>IP Privada</h4>
+        <p>
+          Una dirección IP Privada se utiliza para identificar equipos o dispositivos dentro de una red doméstica o privada.
 
-              Las direcciones IP Privadas sí pueden repetirse pero en redes distintas, en cuyo caso no habrá conflictos debido a que las redes se encuentran separadas.
-            </p>
-            <h4>IP Publica</h4>
-            <p>
-              La dirección IP Pública es aquella que nos ofrece el proveedor de acceso a Internet y se asigna a cualquier equipo o dispositivo conectado de forma directa a Internet.
-              Las direcciones IP Públicas son siempre únicas.
-            </p>
-            <h3>Direccion MAC</h3>
-            <p>
-              Es un identificador de 48 bits (6 bloques de dos caracteres hexadecimales [8 bits]) que corresponde de forma única a una tarjeta o dispositivo de red.
-              En nuestro caso la direccion de la MAC sera cambiada.
-            </p>
-       
-          </article>
-          <!-- Vulnerabilidad de redes -->
-          <!-- ModoMonitor -->
-          <h2>Redes WPA/WPA2</h2>
-          <p> <strong>Nota </strong> la tarjeta que se pondra de  ejemplo es la interna de una laptop y es llamada en mi caso <strong>wlan0</strong>.</p>
-          <article>
-            <h3>Configurando en Modo Monitor</h3>
-            
-            <p>1.Listar las interfaz de red existentes.</p>
-            <code>ifconfig</code>
+          Las direcciones IP Privadas sí pueden repetirse pero en redes distintas, en cuyo caso no habrá conflictos debido a que las redes se encuentran separadas.
+        </p>
+        <h4>IP Publica</h4>
+        <p>
+          La dirección IP Pública es aquella que nos ofrece el proveedor de acceso a Internet y se asigna a cualquier equipo o dispositivo conectado de forma directa a Internet.
+          Las direcciones IP Públicas son siempre únicas.
+        </p>
+        <h3>Direccion MAC</h3>
+        <p>
+          Es un identificador de 48 bits (6 bloques de dos caracteres hexadecimales [8 bits]) que corresponde de forma única a una tarjeta o dispositivo de red.
+          En nuestro caso la direccion de la MAC sera cambiada.
+        </p>
+    
+      </article>
+      <!-- Vulnerabilidad de redes -->
+      <!-- ModoMonitor -->
+      <h2>Redes WPA/WPA2</h2>
+      <p> <strong>Nota </strong> la tarjeta que se pondra de  ejemplo es la interna de una laptop y es llamada en mi caso <strong>wlan0</strong>.</p>
+      <article>
+        <h3>Configurando en Modo Monitor</h3>
+        
+        <p>1.Listar las interfaz de red existentes.</p>
+        <code>ifconfig</code>
+      
+        <h3>Kill procesos conflictivos</h3>
+        <code>Killall dhclient wpa_suplicant 2>/dev/null</code>
+        <code>airmon-ng check kill</code>
+        <p>2.Habiendo matado los procesos seleccionar el nombre y configura en modo monitor con</p> <code>airmon-ng start &lt;wlan0 &gt;</code>
+        <img src="./wifi/inicio.png" alt="before">
+        
+        <code>ifconfig</code>
+        <p> 3.Observar que la interfaz seleccionada a desaparecido o ha cambiado. </p>
+          <img src="./wifi/inicio2.png" alt="after">
+        
+        <p>4.Listamos la informa sobre la configuración de red inalámbrica <code>iwconfig</code> y observarmos que aparece nuestra interfaz seleccionada en modo monitor.</p>
+        <img src="./wifi/modomonitor.png" alt="change_mon">
+        <p>5.Configurado en modo monitor volvemos a levantar la interfaz <code>ifconfig &lt;wlan0&gt; up </code></p>
+        <h3>Deshabilitar modo monitor</h3>
+<p>         Detenemos el modo monitor
+<code>airmon-ng stop &lt;wlan0&gt;</code>
+y verificamos.</p>
+        <code>ifconfig</code>
+      
+        <h3>Conectarse a la red de Internet</h3>
+        <p>Es aconsejable reiniciar el servicio y reiniciar el computador.</p>
+        <code>/etc/init.d/networking restart</code>
+      </article> 
+      <!-- MAC Address Spoofing -->
+      <h2>Cambiar nuestra direccion MAC </h2>
+      <article>
+        <h3>Macchanger</h3>
+        <p>1.Revisamos cual es nuetra direccion MAC.</p>
+        <code>macchanger -s &lt;wlan0&gt; #-s=show</code>
+        <p>Los primeros tres bloques son importantes identifica la tecnologia del dispositivo.</p>
+        <img src="./wifi/MAC.png" alt="MoreInfo">
+        <p>2.Listamos OUI's.</p>
+        <code>macchanger -l | grep "P.."</code>
+        <img src="./wifi/owis.png" alt="ouis">
+        <p>3.Realizamos los cambios.</p>
+        <code>macchanger --mac=&lt;oui selecionada&gt;:da:af:91   &lt;wlan0&gt;</code> 
+        <img src="./wifi/macrename2.png" alt="try">
+        <p><strong>Nota :</strong> UAA puede ser aleatoria pero en Hexadecimal</p>
+        <p> Para cambiar la direccion de mac la interfaz en modo monitor debe estar detenida posteriormente la levantamos.</p>
+        <img src="./wifi/changemac.png" alt="changemac">
+      </article>
+        <!--Aircrack-ng -->
+        <h2>Airodump-ng</h2>
+        <article>
+          <p>1.Tratamos de capturar teniendo nuestra interfaz levantada en modo monitor.</p>
+          <code>airodump-ng  &lt;wlan0&gt; </code>
+          <img src="./wifi/scanedports.png" alt="">
+          <p>Podemos Filtra puntos de acceso y clientes</p>
+          <p><i>BSSID</i> direccion MAC del AP</p>
+        <p><i>PWR</i> nivel de señal,-1 no hay señal</p>
+        <p><i>Beacons</i> nro de packetes de anucios</p>
+        <p><i>#Data</i> nro packetes capturados</p>
+        <p>  <i>#/s </i> nro de paquetes de datos capturados por segundo calculando la media de los últimos 10 segundos.</p>
+          <p> <i>CH </i>  Número de canal (obtenido de los “paquetes anuncio” o beacons).</p>
+        <p> <i>CIPHER</i> Tipos de cifrados</p>
+        <p> <i>AUTH</i> protocolo de autenticación usado.</p>
+        <p> <i>ESSID</i> Nombre de la red inalambrica</p>
+        </article>
+        <!-- MODOS DE FILTRO -->
+        <h3>Modos de Filtro</h3>
+        <article>
+          <p>Escogemos filtrar por el nombre de la red "ESSID" tambien llamada "SSID".</p>
+          <code>airodump-ng -c 1 --bssid F8:E8:11:1F:D3:68 &lt;wlan0&gt;</code>
+          Guardando las redes.
+          <p>Se adiciona el -w para capturar los datos es importante para un Handshake.</p>
+          <img src="./wifi/saved.png" alt="">
+          <code>airodump-ng -c 10 -w captura --bssid &lt;::::::&gt; wlan0</code>
+        </article>
+        <!-- AICRACK DEAUTH AND AUTH -->
+        <h3> Aireplay-ng </h3>
+        <strong>Desautenticacion</strong><p>Se trata de denegar los servicios (DoS),desautenticamos los packetes que debian ser injectados en la red mediante la prevencion de la coneccion del cliente al AP.</p>
+        <code>aireplay-ng -0 10  -e &lt;E..L&gt;  -c &lt; &gt; wlan0 </code>
+        <code>aireplay-ng -0 10 -e bssid  -c FF:FF:FF:FF:FF:FF wlan0</code>
           
-            <h3>Kill procesos conflictivos</h3>
-            <code>Killall dhclient wpa_suplicant 2>/dev/null</code>
-            <code>airmon-ng check kill</code>
-            <p>2.Habiendo matado los procesos seleccionar el nombre y configura en modo monitor con</p> <code>airmon-ng start &lt;wlan0 &gt;</code>
-            <img src="./wifi/inicio.png" alt="before">
-           
-            <code>ifconfig</code>
-            <p> 3.Observar que la interfaz seleccionada a desaparecido o ha cambiado. </p>
-             <img src="./wifi/inicio2.png" alt="after">
-           
-            <p>4.Listamos la informa sobre la configuración de red inalámbrica <code>iwconfig</code> y observarmos que aparece nuestra interfaz seleccionada en modo monitor.</p>
-            <img src="./wifi/modomonitor.png" alt="change_mon">
-            <p>5.Configurado en modo monitor volvemos a levantar la interfaz <code>ifconfig &lt;wlan0&gt; up </code></p>
-            <h3>Deshabilitar modo monitor</h3>
-   <p>         Detenemos el modo monitor
-    <code>airmon-ng stop &lt;wlan0&gt;</code>
-    y verificamos.</p>
-            <code>ifconfig</code>
-          
-            <h3>Conectarse a la red de Internet</h3>
-            <p>Es aconsejable reiniciar el servicio y reiniciar el computador.</p>
-            <code>/etc/init.d/networking restart</code>
-          </article> 
-          <!-- MAC Address Spoofing -->
-          <h2>Cambiar nuestra direccion MAC </h2>
-          <article>
-            <h3>Macchanger</h3>
-            <p>1.Revisamos cual es nuetra direccion MAC.</p>
-            <code>macchanger -s &lt;wlan0&gt; #-s=show</code>
-            <p>Los primeros tres bloques son importantes identifica la tecnologia del dispositivo.</p>
-            <img src="./wifi/MAC.png" alt="MoreInfo">
-            <p>2.Listamos OUI's.</p>
-            <code>macchanger -l | grep "P.."</code>
-            <img src="./wifi/owis.png" alt="ouis">
-            <p>3.Realizamos los cambios.</p>
-            <code>macchanger --mac=&lt;oui selecionada&gt;:da:af:91   &lt;wlan0&gt;</code> 
-            <img src="./wifi/macrename2.png" alt="try">
-            <p><strong>Nota :</strong> UAA puede ser aleatoria pero en Hexadecimal</p>
-           <p> Para cambiar la direccion de mac la interfaz en modo monitor debe estar detenida posteriormente la levantamos.</p>
-           <img src="./wifi/changemac.png" alt="changemac">
-          </article>
-           <!--Aircrack-ng -->
-           <h2>Airodump-ng</h2>
-           <article>
-             <p>1.Tratamos de capturar teniendo nuestra interfaz levantada en modo monitor.</p>
-             <code>airodump-ng  &lt;wlan0&gt; </code>
-             <img src="./wifi/scanedports.png" alt="">
-             <p>Podemos Filtra puntos de acceso y clientes</p>
-             <p><i>BSSID</i> direccion MAC del AP</p>
-            <p><i>PWR</i> nivel de señal,-1 no hay señal</p>
-            <p><i>Beacons</i> nro de packetes de anucios</p>
-            <p><i>#Data</i> nro packetes capturados</p>
-            <p>  <i>#/s </i> nro de paquetes de datos capturados por segundo calculando la media de los últimos 10 segundos.</p>
-             <p> <i>CH </i>  Número de canal (obtenido de los “paquetes anuncio” o beacons).</p>
-            <p> <i>CIPHER</i> Tipos de cifrados</p>
-            <p> <i>AUTH</i> protocolo de autenticación usado.</p>
-            <p> <i>ESSID</i> Nombre de la red inalambrica</p>
-            </article>
-            <!-- MODOS DE FILTRO -->
-            <h3>Modos de Filtro</h3>
-            <article>
-              <p>Escogemos filtrar por el nombre de la red "ESSID" tambien llamada "SSID".</p>
-              <code>airodump-ng -c 1 --bssid F8:E8:11:1F:D3:68 &lt;wlan0&gt;</code>
-              Guardando las redes.
-              <p>Se adiciona el -w para capturar los datos es importante para un Handshake.</p>
-              <img src="./wifi/saved.png" alt="">
-              <code>airodump-ng -c 10 -w captura --bssid &lt;::::::&gt; wlan0</code>
-            </article>
-            <!-- AICRACK DEAUTH AND AUTH -->
-            <h3> Aireplay-ng </h3>
-            <strong>Desautenticacion</strong><p>Se trata de denegar los servicios (DoS),desautenticamos los packetes que debian ser injectados en la red mediante la prevencion de la coneccion del cliente al AP.</p>
-            <code>aireplay-ng -0 10  -e &lt;E..L&gt;  -c &lt; &gt; wlan0 </code>
-            <code>aireplay-ng -0 10 -e bssid  -c FF:FF:FF:FF:FF:FF wlan0</code>
-             
-            
-        </section>
-        <!-- post2 -->
-        <section class="main-section" id="DetecciondeIntrusos">
-            <header>Deteccion de Intrusos</header>
-            <article>
-                <h3>Patrones</h3>
-                <p>son sucesos recurrentes. </p>
-                <h3>Paquetes?</h3>
-                <p>Se tiene un proceso de Envio,esta pasa por capas que van encapsulando ,se adicionan a la cabecera de protocolo del Paquete.</p>
-                <img src="./paquetes/tcpip.jpg" alt="">
-                <h3>Wireshark</h3>
-                <p>Es una herramienta de analisis sobre paquetes.</p>
-                <h3>¿Que es un IDS?</h3>
-                <p>Son llamados los sistemas de Deteccion de Intruosos son herramientas,
-                  estas aumentan la seguridad en las redes,estos por si solos no pueden detener a los intrusos ,necesitan  tener una configuracion conjunta con el Firewall,para entender es una ids debemos saber que es un log.</p>
-                <h3>¿Que es un log?</h3>
-                <p>Es un registro que deja un sistema informativo,ejemplo:  accesos de usuarios y borrados,puedes visalizarlos en /var/log en hay se encuentran todos los logs de Sistema . </p>
-                <h3>Tipos de IDS</h3>
-                <h4>HIDS(Host  IDS)</h4>
-                <p>Deteccion basada en host de un maquina.</p>
-                <h4>NIDS(Network IDS)</h4>
-                <p>Monitoreo de la red</p>
-                <h3>IPS</h3>
-                <p>Sistema de Prevencion de Intrusion,ejerce el control de acceso a una red.</p>
+        
+    </section>
+    <!-- post2 -->
+    <section class="main-section" id="DetecciondeIntrusos">
+        <header>Deteccion de Intrusos</header>
+        <article>
+            <h3>Patrones</h3>
+            <p>son sucesos recurrentes. </p>
+            <h3>Paquetes?</h3>
+            <p>Se tiene un proceso de Envio,esta pasa por capas que van encapsulando ,se adicionan a la cabecera de protocolo del Paquete.</p>
+            <img src="./paquetes/tcpip.jpg" alt="">
+            <h3>Wireshark</h3>
+            <p>Es una herramienta de analisis sobre paquetes.</p>
+            <h3>¿Que es un IDS?</h3>
+            <p>Son llamados los sistemas de Deteccion de Intruosos son herramientas,
+              estas aumentan la seguridad en las redes,estos por si solos no pueden detener a los intrusos ,necesitan  tener una configuracion conjunta con el Firewall,para entender es una ids debemos saber que es un log.</p>
+            <h3>¿Que es un log?</h3>
+            <p>Es un registro que deja un sistema informativo,ejemplo:  accesos de usuarios y borrados,puedes visalizarlos en /var/log en hay se encuentran todos los logs de Sistema . </p>
+            <h3>Tipos de IDS</h3>
+            <h4>HIDS(Host  IDS)</h4>
+            <p>Deteccion basada en host de un maquina.</p>
+            <h4>NIDS(Network IDS)</h4>
+            <p>Monitoreo de la red</p>
+            <h3>IPS</h3>
+            <p>Sistema de Prevencion de Intrusion,ejerce el control de acceso a una red.</p>
 
-            </article>
-        </section>
-        <!-- post3 -->
-        <section class="main-section" id="Shodan">
-          <header>Shodam atemorizada 😱 </header>
-           <p style="font-family: 'Bitter', serif;">21/06/21</p>
-          <article>
-            <h3>Intro 🎤 </h3>
-            <p>Es un Search Engine como google o big pero puede brindarnos informacion
-              de puertos ,controladores ,lugares publicos los cuales tal vez se descubran  vunerabilidades en ellas.
-            </p>
-            <p>Shodan brinda informacion de de todo aparato conectado a  un red como una pc hasta un controlador de una empresa.</p>
-            <h3>Aplicacion 🔍</h3>
-            <li><strong>Seguridad  de redes</strong>
-              Es utilizado para investigaciones de  Seguridad.
-              <a href=""></a></li>
-            <li><strong>Investigacion de Mercado </strong>
-              <br>
-             El proposito de Shodan  al comienzo fue del ser un motor de Market Research por que este es muy distinto a los demas como google ,¿Está encontrando computadoras que ejecutan una determinada pieza de software (como Apache)? ¿O si desea saber qué versión de Microsoft IIS es la más popular? ¿O quiere ver cuántos servidores FTP anónimos hay? ¿Quizás surgió una nueva vulnerabilidad y desea ver cuántos hosts podría infectar? Los motores de búsqueda web tradicionales no le permiten responder esas preguntas ".
-             </li>
-             <li>
-              <strong >Internet de las Cosas</strong>
-              <p>Aparte de la  webcam existen otros aparatos que deberian tener normas de regulacion para la seguridad de los propietarios. <a href="https://www.zdnet.com/article/shodan-the-iot-search-engine-which-shows-us-sleeping-kids-and-how-we-throw-away-our-privacy/">Mirando a niños que duermen</a></p>
-            </li>
-            <li><strong>Inspeccion de Ransomware</strong>
-            Shodan tambien esta del lado el bien. <a href="https://cso.computerworld.es/actualidad/el-buscador-shodan-tumba-una-red-de-bots">Shodan tumba una red de `bots´</a> </li>
-            <li><strong>Ciber Risk</strong>
-            <a href="https://www.washingtonpost.com/investigations/cyber-search-engine-exposes-vulnerabilities/2012/06/03/gJQAIK9KCV_story.html">Exponiendo a sistemas de Industrias</a>
-            </li>
-            <h3>TOP en Busquedas   🆒 </h3>
-            <p>
-              - Webcam <br>
-              - Cams <br>
-              - Netcam <br>
-              - Defaultpassword <br>
-              - Ufanet <br>
-                *:80;*:8080;
-              - Dreambox <br>
-              - Live sex cam <br>
-              - Webcamxp <br>
-              - Webcam no pass <br>
-              - MayGion IP cameras (admin:admin) <br>
-            </p>
-           
-          </article>
-        </section>
+        </article>
+    </section>
+    <!-- post3 -->
+    <section class="main-section" id="Shodan">
+      <header>Shodam atemorizada 😱 </header>
+        <p style="font-family: 'Bitter', serif;">21/06/21</p>
+      <article>
+        <h3>Intro 🎤 </h3>
+        <p>Es un Search Engine como google o big pero puede brindarnos informacion
+          de puertos ,controladores ,lugares publicos los cuales tal vez se descubran  vunerabilidades en ellas.
+        </p>
+        <p>Shodan brinda informacion de de todo aparato conectado a  un red como una pc hasta un controlador de una empresa.</p>
+        <h3>Aplicacion 🔍</h3>
+        <li><strong>Seguridad  de redes</strong>
+          Es utilizado para investigaciones de  Seguridad.
+          <a href=""></a></li>
+        <li><strong>Investigacion de Mercado </strong>
+          <br>
+          El proposito de Shodan  al comienzo fue del ser un motor de Market Research por que este es muy distinto a los demas como google ,¿Está encontrando computadoras que ejecutan una determinada pieza de software (como Apache)? ¿O si desea saber qué versión de Microsoft IIS es la más popular? ¿O quiere ver cuántos servidores FTP anónimos hay? ¿Quizás surgió una nueva vulnerabilidad y desea ver cuántos hosts podría infectar? Los motores de búsqueda web tradicionales no le permiten responder esas preguntas ".
+          </li>
+          <li>
+          <strong >Internet de las Cosas</strong>
+          <p>Aparte de la  webcam existen otros aparatos que deberian tener normas de regulacion para la seguridad de los propietarios. <a href="https://www.zdnet.com/article/shodan-the-iot-search-engine-which-shows-us-sleeping-kids-and-how-we-throw-away-our-privacy/">Mirando a niños que duermen</a></p>
+        </li>
+        <li><strong>Inspeccion de Ransomware</strong>
+        Shodan tambien esta del lado el bien. <a href="https://cso.computerworld.es/actualidad/el-buscador-shodan-tumba-una-red-de-bots">Shodan tumba una red de `bots´</a> </li>
+        <li><strong>Ciber Risk</strong>
+        <a href="https://www.washingtonpost.com/investigations/cyber-search-engine-exposes-vulnerabilities/2012/06/03/gJQAIK9KCV_story.html">Exponiendo a sistemas de Industrias</a>
+        </li>
+        <h3>TOP en Busquedas   🆒 </h3>
+        <p>
+          - Webcam <br>
+          - Cams <br>
+          - Netcam <br>
+          - Defaultpassword <br>
+          - Ufanet <br>
+            *:80;*:8080;
+          - Dreambox <br>
+          - Live sex cam <br>
+          - Webcamxp <br>
+          - Webcam no pass <br>
+          - MayGion IP cameras (admin:admin) <br>
+        </p>
+        
+      </article>
+    </section>
+    <!-- post4 -->
+     <section class="main-section" id="WindowsPEF">
+       <header> Windows Privilege Escalation Fundamentals😀</header>
+       <p style="font-family: 'Bitter', serif;">23/06/21</p>
+       <article>
+          <h3>Intro</h3>
+          <p>Windows y seguridad, su parche de tiempo  el objetivo es getsystem.</p>
+          <p>En la linea de comandos no existe gran diferencia entre versiones</p>
+          <h3>Informacion de entrada [Information Gatering]</h3>
+          <p style="color: blue;"><strong>¿Que tipo de maquina es?</strong></p>
+          <p>
+            <code>C:\WINDOWS\system32>systeminfo
+C:\WINDOWS\system32>systeminfo | findstr /B /C:"OS Name" /C:"OS Version"#nombre del so y la Version
+//no appears in windows 10
+C:\WINDOWS\system32>echo %username% # el Usuario  
+user1
+C:\WINDOWS\system32>Get-WmiObject -query 'select * from wim32_quickfixengineering | foreach {$_.hotfixid}' #Lista todos los patches
+<strong>mas description de los patches</strong>
+C:\WINDOWS\system32>Get-Hotfix -description "Security update" # Lista de las actualizaciones
+</code>
+          </p>
+          <p style="color: blue;"><strong>¿Cuales son las conecciones?</strong></p>
+          <p>
+<code> 
+  C:\WINDOWS\system32>net users #lista todos los usuarios
+  Cuentas de usuario de \\DESKTOP-opmk
+  -------------------------------------------------------------------------------
+  Administrador            DefaultAccount           Invitado
+  user1                    blabla
+  C:\WINDOWS\system32>net user user1 #especifico Usuario
+</code>
+<p>Networking y Interfaces</p>
+<code>C:\WINDOWS\system32> ipconfig /all</code>
+<code>C:\WINDOWS\system32> route print</code>
+<p>ARP (Address Resolution Protocol)</p>
+<code>C:\WINDOWS\system32> arp -A</code>
+<p>Activas Conecciones usamos nestat</p>
+<code>netstat -ano</code>
+<p>netsh no es un comando universal para todas las versiones</p>
+<p><code>>C:\WINDOWS\system32>  netsh firewall show config</code> o <code>>C:\WINDOWS\system32>  netsh advfirewall firewall</code></p>
+<p>Schedule Tasks ,runnig process, started services</p>
+<code>>C:\WINDOWS\system32> schtasks /query /fo LIST /v</code>
+<p>Corriendo procesos para empezar servicios </p>
+<code>C:\WINDOWS\system32>tasklist  /SVC</code>
+</p>
+<p style="color: blue;"><strong>¿Que privilegios tiene?</strong></p>
+<p>En Windows 10 ,la cuenta de superadministrador en Windows es igual que la cuenta de root de Linux,es controlada por la UAC (Prompt) se tiene el control total sobre el sistema.
+</p>
+<code>net user administrator /active:yes </code>
+<h3>WMIC Remotely Read System Information with WMI☠️</h3>       
+<p>WMIC lee la informa  del sistema , es posible ejecutar cualquier tipo de tareas como obtener información, iniciar, detener, pausar procesos y servicios así como cambiar cualquier tipo de configuración en el equipo al que se tenga acceso como administradorprocesos remotamente tambien locales.</p>
+<p>Comandos</p>
+<p>#Información sobre el BIOS de la computadora</p>
+<code>C:\WINDOWS\system32>WMIC /Output:STDOUT BIOS get /all /format:LIST</code>
+<p>#Obtener con WMIC información sobre errores del sistema operativo</p>
+<code>C:\WINDOWS\system32>WMIC /Output:STDOUT  RECOVEROS get /all /format:LIST</code>
+<p>Estos son algunos de los basicos conceptos que se deben conocer que recopile y espero que sea de ayuda.🙈</p>
+</article>
+     </section>
+     <!-- post5 -->
+     <section class="main-section" id="RegexBash">
+      <header> Regex & Bash  </header>
+      <p style="font-family: 'Bitter', serif;">25/06/21</p>
+      <article>
+        <h3>Perl (PCRE)</h3>
+        <h5>Limitando la busqueda</h5>
+        <code>$ locate john | grep 'john$'</code>
+        <p>Lista todos los folders  /john o /dmg2john</p>
+        <h5>Matching caracteres</h5>
+          <code>locate html  | grep '/var/.../html'</code>
+        <p>"/var", luego tenga dos caracteres y termine con la cadena "/html"</p>
+        <h5>from UPPER to lower</h5>
+<code>$ cat output.txt
+  HOLA PARIS
+$ tr '[:upper:]' '[:lower:]' &lt; input.txt &gt; output.txt
+$ cat output.txt
+hola paris
+</code>
+       <h5>Remover Espacios</h5> 
+       <code> $ sed "${x// /}"
+      </code>
+      <h5>Listar los archivos que comienzan con</h5>
+      <code>ls -d M*</code>
+      <p>Estando en el directorio /c/Program Files se listan: MSBuild/ 'Microsoft SQL Server'/ 'Mozilla Firefox'/</p>  
+    </article>
 
-     
-      </main>
+    </section>
+    <!-- post6 -->
+    <section class="main-section"  id="WindowsPrivileges">
+      <header> Windows Privileges </header>
+      <p style="font-family: 'Bitter', serif;">26/06/21</p>
+      <article>
+        <h4>Privilegios</h4>
+        Un administrador del sistema asigna privilegios a cuentas de usuarios y grupos, mientras que el sistema otorga o deniega el acceso a un objeto asegurable según los derechos de acceso otorgados en las ACE en la DACL del objeto.
+    <p>    Debemos darnos cuenta que hay una diferencia entre  <i>Privilegios</i> y <i>Derechos de Acceso</i>.</p>
+        <a href="https://docs.microsoft.com/en-us/windows/win32/secauthz/privileges">MICROSOFT:Privileges</a>
+        <h4>Derechos de Acceso</h4>
+        <p>Cada tipo de [ securable object ]objeto asegurable tiene un conjunto de <strong>derechos de acceso</strong> que corresponden a operaciones específicas para ese tipo de objeto. Además de estos derechos de acceso específicos de objetos, existe un conjunto de <strong>derechos de acceso</strong> estándar que corresponden a operaciones comunes a la mayoría de los tipos de objetos asegurables.</p>
+        <a href="https://docs.microsoft.com/en-us/windows/win32/secauthz/standard-access-rights">MICROSOFT: Standard Access Rights </a>
+        <h4>Access Tokens</h4>
+        <p>Cada proceso o hilo creado por un usuario heredado tiene una copia de su token se pueden efectuar para privilegios de otros procesos.</p>
+        <h4>Restricted Access Tokens</h4>
+        <p>Es un token de Acceso principal o de suplantacion que ha sido modificado por la funcion CreateRestrictedToken.</p>
+        <p>ProcessExplorer</p>
+        <h4>Comunes Privilegios Accedidos</h4>
+        <p>Los comunes privilegios pueden ser par un usuario o para un grupo.</p>
+        <p style="color: aqua;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">SeBackupPrivilege</p>
+        <h4>Commonly abused privileges</h4>
+        <p><strong>SeDebugPrivilege</strong> los malware abusan de este  privilegio para actuar con la inyection de codigo dentro de un confiado processo , porque este permite la creacion de nuevos remotos hilos en un processo fijado como Objetivo.</p>
+        <h5>Activacion Auditoria de Privilegios </h5>
+        <p>Todo comienza con un lo logs in Windows10 and Server 2016,primero nos enfocamos en (GPO) Group Policy Object ,desactiva los backups  y restore privilegios.</p>
+        <h5>Identicar privilegos usados</h5>
+        <p>Event Code 4672,el usuario es permitido para SeDebugPrivileges ,</p>
+        <p>Event Code 4703,Autorization policy Change.</p>
+        
+         
+      </article>
+    </section>
+    <!-- post7 -->
+    <section class="main-section"  id="SFB">
+      <header> Conceptos Forense Basica </header>
+      <p style="font-family: 'Bitter', serif;">3/07/21</p>
+      <article>
+          <h3>Integridad de la Evidencia</h3>
+          <p>Se comprende como evidencia digital a un cnojunto de  datos en en conjunto  Binario con sus referencias(metadatos).</p>
+          <p>1. No cambiar de Estado </p>
+          <p>Dispositivos encendidos - Preservar el funcionamiento de la RAM</p>
+          <p>Dispostivos apagados - Prevenir  la Sobrescritura</p>
+          <h3>Conocimiento de las Herramientas</h3>
+          <p>Herramientas de Cambios de fecha ,se sabe que lo mas importante es la line de tiempo,basada en cambios he insidentes realizados .</p>
+          <h3>Etiquetar && Documentar</h3>
+          <p>no es un oficio sino una actitud ,visibilidad de Procesos , coomo demostrar que mostrar,piezay proceso de Desarrollo  y nos obliga  a una profunda investigacion.</p>
+          <h3>Volatilidad</h3>
+          <p> Hoy en dia los dispositivos moviles que realizan complejas tareas de almacenamiento.</p>
+          <p>esto genera que posea menos control  sobre variables influyentes.</p>
+          <p>La Memoria RAM  posee informacion valiosa.</p>
+          <p>El RCF 3227 establece el ordenen base a la volatilidad  de los datos.</p>
+          <h3>Read Only</h3>
+          <p>Analizando en modo solo Lectura.</p>
+      </article>
+    </section>
+    <!-- post8 -->
+    <section class="main-section"  id="Kerberos">
+<header> Kerberos </header>
+<p style="font-family: 'Bitter', serif;">12/07/21</p>
+<article>
+<h4>¿Que es Kerberos?</h4>
+<p>Kerberos es un (Protocolo de autenticacion en la Red de Computadoras)computer network authentication protocol usada por microsoft Winodws perp existen implementaciones para otros SO.
+  Usa una simetrica llave Criptografica,require 3 entidades para la autenticacion.</p>
+<p>Kerberos mejoro la seguridad en la Rede y convirtio mas complicada la imfiltracion en la Red.</p>
+<h4>¿Kerberos && NTLM diferencias?</h4>
+<p>La verificación de terceros y la capacidad de Cifrado de Kerberos .</p>
+<h4>¿Como se authentica con Kerberos?</h4>
+<p>1.Al KDC se solicita un Ticket de TGT.</p>
+<p>2.KDC Verificay devuelve un Ticket TGT y la clave de Sesion.</p>
+<p>3.TGT se cifra mediante TGS</p>
+<p>4.El cliente alamcena el TGT  con un Periodo de expiracion.</p>
+Client
+<p>5.Si se si acceder a un Recurso SPN se envia el TGT a un TGS.</p>
+<p>6.KDC verifica el TGT para dar acceso.</p>
+<p>7.TGS emite un clave de sesion al usuario.</p>
+<p>8.El cliente posee la clave y demuesra que tiene acceso al Servicio.</p>
+<h4>¿Es vunerable Kerberos?</h4>
+<p>-Malware</p>
+<p>-Contraseñas debiles.</p>
+<img src="./kerberos/kerberos.jpg" alt="Kerberos">
+      </article>
+    </section>
+  </main>
 </body>
 
 </html>
