@@ -22,6 +22,8 @@
           <li><a class="nav-link" href="#WindowsPrivileges"> Windows Privileges </a></li>
           <li><a class="nav-link" href="#SFB">Seguridad Forense Basica</a></li>
           <li><a class="nav-link" href="#Kerberos">Kerberos</a></li>
+          <li><a class="nav-link" href="#ARP">ARP Poisoning</a></li>
+          <li><a class="nav-link" href="#SP">Politicas de Seguridad</a></li>
         </ul>
       </nav>
       
@@ -381,6 +383,50 @@ Client
 <p>-Malware</p>
 <p>-Contraseñas debiles.</p>
 <img src="./kerberos/kerberos.jpg" alt="Kerberos">
+      </article>
+    </section>
+    <!-- post9 -->
+    <section class="main-section"  id="Kerberos">
+      <header>ARP Poisoning</header>
+      <p style="font-family: 'Bitter', serif;">13/07/21</p>
+      <article>
+        <h4>¿ARP?</h4>
+        <p>Esta apoyar a las capa de Red utilizada desde los comienzos del internet,permite a los dispositivos conectados  preguntar que dispositivo esta aiignado  dado una ip addres</p>
+        <h4>¿Ques es ARP Poisoning?</h4>
+        <p>Los mensajes no son autenticados,entonces estos pueden ser cambiados ,Por ejemplo Si una computadora C1 pregunta la Mac Address de la Computadora C2 tambien existe un computadora C3 entonces la computadora C3 puede responder a la computadora C1.y la respuesta es aceptada.</p>
+        <p>La computadora c3 puede envenenar"poison" la ARP Cache del host de una red local.</p>
+        <h4>Steps</h4>
+        <p>1.Selecciona la victima</p>
+        <p>Preferentemente se  selecciona un Router por que puedes quebrar el trafico de un entera subnet.</p>
+        <p>2.Prepara y hace uso de Herramientas para el Ataque</p>
+        <p>Esperan a una Peticion  o pueden hacer un  broadcasting de los mensajes</p>
+        <p>3.Realiza cambios con el trafico dirigido</p>
+        <p>pude alterar la red o tambien puede causar un "Agujero Negro"para que nunca lleguen los mensajes a su destino.</p>
+        <h4>¿Que es Scapy?</h4>
+        <p>Scapy es una herramienta de manipulacion de Paquetes.Para Linux ,Windows y otro OS.</p>
+        <h3>ARP Poisoning en Python</h3>
+      </article>
+    </section>
+    <!-- post10-->
+    <section class="main-section"  id="SP">
+      <header>Politicas de Seguridad</header>
+      <p style="font-family: 'Bitter', serif;">15/07/21</p>
+      <article>
+        <h4>¿Que son las Politicas de Seguridad?</h4>
+        <p>permisos que se ponen a un sistema.</p>
+        <p>por ejemplo la politica de uso de una computadora es ningun usuario pueda entra antes iniciar sesion.</p>
+        <p>despues se le brindan metadatos correspondientes para que pueda ejecutar ciertas acciones.</p>
+        <p>prevenimos todo mal,con el continuo trabajo  que nunca se termina realmente.</p>
+        <h4>🐧SELinux</h4>
+<p>Es un sistema de Etiqueta de un ordenador o un conjunto de nodos de linux en la nube.</p>
+<p>SElinux etiqueta todo lo pertenece al Sistema otorga 2 politicas que Gobiernan procesos de etiquetados y bjetos etiquetados.</p>
+        <h4>🐋🐋Pod Kubernetes</h4>
+        <p><strong>Politicas de Seguridad</strong></p>
+          <p>Son condiciones especificas que  de cumplir un Pod  para ser programado/ aceptado.</p>
+        <p><strong>Contextos de Seguridad</strong></p>
+        <p>Son condiciones espeficicas que debe cumplir un pod pero tambien se incluye un tiempo de ejecucion</p>
+        <h4>🔥Firewall</h4>
+        <p>Esta protege a la red y todos los que estan dentro de ella.Los Cortafuegos vienen integrados en algunos dispositivos.Las politicas se pueden constituir de 2 partes: negacion de servicios y las excepciones de entradas y salidas</p>
       </article>
     </section>
   </main>
