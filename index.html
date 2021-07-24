@@ -301,6 +301,13 @@ hola paris
       <h5>Listar los archivos que comienzan con</h5>
       <code>ls -d M*</code>
       <p>Estando en el directorio /c/Program Files se listan: MSBuild/ 'Microsoft SQL Server'/ 'Mozilla Firefox'/</p>  
+   <h5>Quitar comentario</h5>
+  <p>tenemos el texto: text.txt</p>
+ <p> # c1</p>
+ <p> #c2</p>
+<p>echo('hi')\</p>
+  <code> $ cat text.txt | sed 's/^#.*//g' | sed 's/.*#.*//g'| sed '/^\s*$/d'</code>
+  <code>echo('hi')\</code>
     </article>
 
     </section>
@@ -427,6 +434,24 @@ Client
         <p>Son condiciones espeficicas que debe cumplir un pod pero tambien se incluye un tiempo de ejecucion</p>
         <h4>🔥Firewall</h4>
         <p>Esta protege a la red y todos los que estan dentro de ella.Los Cortafuegos vienen integrados en algunos dispositivos.Las politicas se pueden constituir de 2 partes: negacion de servicios y las excepciones de entradas y salidas</p>
+      </article>
+    </section>
+    <!-- post11 -->
+    <section class="main-section"  id="SP">
+      <header>Basicos Conceptos de Pentesting</header>
+      <p style="font-family: 'Bitter', serif;">23/07/21</p>
+      <article>
+       <p> Conoceremos mas sobre BindShells ,Reverse Shell y Encrypted el libro de ... me inspiro ha escribir este conceptos.</p>
+       <h4>Bind Shells</h4>
+       <p>Un atacante puede ganar una remota shell puesto que el objetivo tiene un listener ejecutandose.</p>
+       <p>Se tiene las desventajas de un interno host que el objetivo pueda cambiar de NAT/PAT ,el bloqueo respectivo de los Firewall,una solucion al bloqueo es usar el puerto 443.</p>
+      <h4>Reverse Shell</h4>
+      <p>El atancante en este caso tiene un listener corriendo , el objetivo es que se conectara.</p>
+      <p>Se usa los puertos de salida de Red comunes como(80,443) ,no presenta problemas en la traduccion de NAT/PAT</p>
+      <h4>Shell Encriptadas</h4>
+      <p>Este tipo de Shell nos ayuda a ocultar los comandos o processos que se realiza por un atacante o un objetivo(tarjet) .</p>
+      <p>Las nuevas versiones de SSL proveen de la encriptacion de la data transportada,algo importante tambien es que SSH provee la comunicacion encriptada.</p>
+     
       </article>
     </section>
   </main>
