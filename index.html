@@ -25,6 +25,8 @@
           <li><a class="nav-link" href="#ARP">ARP Poisoning</a></li>
           <li><a class="nav-link" href="#SP">Politicas de Seguridad</a></li>
           <li><a class="nav-link" href="#BCP">Basicos Conceptos de Pentesting</a></li>
+          <li><a class="nav-link" href="#RF">Reconocimiento o Footprinting</a></li>
+          <li><a class="nav-link" href="#RF">Investigando mas de Regex</a></li>
         </ul>
       </nav>
       
@@ -309,6 +311,10 @@ hola paris
 <p>echo('hi')\</p>
   <code> $ cat text.txt | sed 's/^#.*//g' | sed 's/.*#.*//g'| sed '/^\s*$/d'</code>
   <code>echo('hi')\</code>
+<p>Listar archivos con inicial caracter especial</p>
+<code>ls -al | awk '{ print $NF}' | grep -oP '^\.[0-9a-z]'</code>
+<img src="./RegexFolder/listar.png" alt="">
+
     </article>
 
     </section>
@@ -437,7 +443,7 @@ Client
         <p>Esta protege a la red y todos los que estan dentro de ella.Los Cortafuegos vienen integrados en algunos dispositivos.Las politicas se pueden constituir de 2 partes: negacion de servicios y las excepciones de entradas y salidas</p>
       </article>
     </section>
-    <!-- post11 -->
+    <!-- post12 -->
     <section class="main-section"  id="BCP">
       <header>Basicos Conceptos de Pentesting</header>
       <p style="font-family: 'Bitter', serif;">23/07/21</p>
@@ -452,8 +458,51 @@ Client
       <h4>Shell Encriptadas</h4>
       <p>Este tipo de Shell nos ayuda a ocultar los comandos o processos que se realiza por un atacante o un objetivo(tarjet) .</p>
       <p>Las nuevas versiones de SSL proveen de la encriptacion de la data transportada,algo importante tambien es que SSH provee la comunicacion encriptada.</p>
-     
       </article>
+    </section>
+    <!-- post13 -->
+    <section class="main-section"  id="RF">
+      <header>Basicos Conceptos de Pentesting</header>
+      <p style="font-family: 'Bitter', serif;">31/07/21</p>
+      <article>
+        <h3>Concepto</h3>
+        <p>El reconocimiento es la parte mas inportante para generar buenos resultados a posteriori.</p>
+        <p><strong>Si tuviera 9 horas para cortar un arbol,le dedicare 6  horas ha afilar la hacha.</strong></p>
+        <h3>Reconocimiento Pasivo</h3>
+        <p>Cuando no tenemos interaccion directa con el cliente o Victima.</p>
+        <p>entonces debemos realizar busquedas externas, el internet ,redes sociales.</p>
+        <h3>Reconocimiento Activo</h3>
+        <p>Se tiene una interaccion directa y podemos realizar: Barridos de Ping ,Conexion a un puerto de un aplicativo,Mapeo de red.</p>
+        <h3>Operadores de Google</h3>
+
+        <h3>Resolviendo Nombres</h3>
+        <p>Se puede obtener la direccion IP ejecutando el comando nslookup tanto en Windows como Linux.</p>
+        <h3>WhoIs</h3>
+        <p>El servicio WHOIS es un sistema distribuido de consultas de información sobre recursos de Internet que permite obtener información sobre el propietario de un nombre de dominio o una dirección IP en Internet.
+        </p>
+      </article>
+    </section>
+    <!-- post13.real -->
+    <section class="main-section"  id="IR">
+      <header>Regex Investigacion</header>
+      <p style="font-family: 'Bitter', serif;">3/08/21</p>
+      <article>
+        <p>Es importante para parsear las salidas ,que usamos grep debemos usar el flag -E para usar especiales caracteres usamos un backslash '\'</p>
+        uno de los usos para conseguir una ip.
+como por ejemplo para busca una Ip:
+<img src="./RegexFolder/ip.PNG" alt="">ahora si nosotros remplazamos la expresion en bash  usando grep -e esto deberiar validar las ip .
+grep -o -e ..:
+<h3>Mirar adentro</h3>
+<p>Para obtener palabras que tiene un patron externo podempos usar la -P. grep -oP ..
+</p>
+<p>mire el comnado</p>
+<img src="./RegexFolder/salida.PNG" alt="maselcmd">
+<h3>Usar otra vuelta</h3>
+<p>Para esto usamos el el flag -E pero dentro de la expresion aumentamos \1 ,pero la expresion que quiere repetir debe ser un grupo eso significa (dentro de parentesis). ejemplo grep -E "([0-9]) is \1"</p>
+<p>Para mas informacion dejo este articulo <strong><a href="https://pentestarmoury.com/2016/10/14/black-magic-parsing-with-regular-expressions-parsing-for-pentesters-post-2/"></a></strong> </p>
+</article>
+
+
     </section>
   </main>
 </body>
