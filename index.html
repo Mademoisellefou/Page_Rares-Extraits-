@@ -31,6 +31,7 @@
           <li><a class="nav-link" href="#RL">Resume Labs</a></li>
           <li><a class="nav-link" href="#BP">ByPass WAFS</a></li>
           <li><a class="nav-link" href="#PUN">Painting en Unity</a></li>
+          <li><a class="nav-link" href="#SPU">Pintando Pixeles con Unity</a></li>
         </ul>
       </nav>
       
@@ -642,6 +643,45 @@ grep -o -e ..:
      
     
     </section>
+    <!-- post20 -->
+    <section class="main-section"  id="SPU">
+      <header>Cambiando Pixels en Unity</header>
+      <p style="font-family: 'Bitter', serif;">15/08/21</p>
+      <article>
+        <h3><strong>Introduccion</strong></h3>
+        <p>El objetivo es poder dibujar sobre una imagen ,manejando los pixeles anteriormene se dibujaba en el canvas.</p>
+        <p>empezemos</p>
+        <h4><strong><i>Pasos</i></strong></h4>
+        <p>1.Escoger una imagen(RawImage) vamos iniciar convirtiendo la imagen y consiguiendo sus valores.</p>
+        <p>2.Ubicacion del Mouse ,arreglar con un offset su posicion.</p>
+        <p>3.teniendo la ubicaion pintamos.</p>
+        <h4><strong><i>Paso1</i></strong></h4>
+        <p>Todo se lleva acabo en el Star.</p>
+        <code>
+          //PseudoCodigo
+          //tenemos un variable textur al final
+          Textura T2D
+          //RawImagen
+          var r=GetComponent&lt;RawImage&gt;;
+          //conseguimos un area rectangular
+          rect=r.recttransform()
+          //fijamos limites
+          width=rect.width;
+          heigth=rect.heigth;
+          //convertimos a textura 
+          textr=r.textura;
+          //se realizan cambios 
+          T2D.filtermode =FilterMode.Point
+          //Get pixeles
+          T2D.SetPixels32(textr.GetPixel());
+          //FINALIZADA NUESTRA Textura
+          T2D.Apply();
+          //Link
+        </code>
+        <img src="./unity/startsetPixels.png" style="width: 500px;height: 400px;" alt="">
+      </article>
+    </section>
+    
   </main>
 </body>
 
