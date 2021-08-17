@@ -31,7 +31,9 @@
           <li><a class="nav-link" href="#RL">Resume Labs</a></li>
           <li><a class="nav-link" href="#BP">ByPass WAFS</a></li>
           <li><a class="nav-link" href="#PUN">Painting en Unity</a></li>
-          <li><a class="nav-link" href="#SPU">Pintando Pixeles con Unity</a></li>
+          <!-- <li><a class="nav-link" href="#SPU">Pintando Pixeles con Unity</a></li> -->
+          <li><a class="nav-link" href="#NetW">Linux: SSH servidores remotos & basicos Networks</a></li>
+
         </ul>
       </nav>
       
@@ -644,7 +646,7 @@ grep -o -e ..:
     
     </section>
     <!-- post20 -->
-    <section class="main-section"  id="SPU">
+    <!-- <section class="main-section"  id="SPU">
       <header>Cambiando Pixels en Unity</header>
       <p style="font-family: 'Bitter', serif;">15/08/21</p>
       <article>
@@ -680,8 +682,57 @@ grep -o -e ..:
         </code>
         <img src="./unity/startsetPixels.png" style="width: 500px;height: 400px;" alt="">
       </article>
+    </section> -->
+    <!-- post21 -->
+    <section class="main-section" id="NetW">
+      <h4>Introduccion</h4>
+      <h4 style="color: rgb(129, 167, 4);"><strong>¿Que es SSH?</strong></h4>
+      <p>Es un protocolo de comunicacion y lo podemos utilizar mediante el comando ssh para conectarnos con un servidor.</p>
+      <h4 style="color: rgb(129, 167, 4);"><strong>¿Beneficios?</strong></h4>
+      <p>El protocolo SSH (Secure SHell) es sin duda uno de los más utilizados para establecer conexiones seguras cliente-servidor.</p>
+      <p>utiliza cifrado simétrico, cifrado asimétrico y hash para asegurar la transmisión de información</p>
+      <h4 style="color: rgb(129, 167, 4);"><strong>¿Como empezamos?</strong></h4>
+      <p>Pues en nuestro caso utilizaremos una distribucion ubuntu 16.04 .</p>
+      <code>ssh username@server-address</code>
+      <p>Utilidades a verificar :ssh ,ssh-copy-id, host.</p>
+      <p>Generamos nuestras llaves ssh,con ssh-keygen</p>
+      <p>Verificamos listando la carpeta .ssh </p>
+      <p>Adicionamos a ssh-copy-id nuestras credenciales de &lt;us&gt;@&lt;ip&gt; </p>
+      <p>Volvemos a ingresar con ssh,esta vez notaras una diferencia.</p>
+      <p>Revisa el file /etc/ssh/sshd_config,por ejemplo permitir root login y el puerto.</p>
+      <h4 style="color: rgb(113, 145, 10);"><strong>Conceptos Generales</strong></h4>
+      <p>DHCP(Dinamic Host Connection Protocol) es un servicio es responsable de configurar la información de la red, como direcciones IP, DNS, etc. para los dispositivos de la red.</p>
+      <p>Lan(Local Area Network)</p>
+      <p>Hostname identicador de la direccion</p>
+      <p>IP :network  y host</p>
+      <p>Switch utilizado para conectar equipos en una red. </p>
+      <p>Router dispositivos de interconexión de redes .</p>
+      <h4 style="color: rgb(113, 146, 3);"><strong>Comandos</strong></h4>
+      <p>Recuerda que encuentras informacion de los comandos con man, --help.</p>
+      <p style="color:orange">ping,ifcong,route y netstat</p>
+      <h4 style="color: rgb(135, 173, 10);"><strong>Problemas</strong></h4>
+      <p>Verifica esta configurado el gateway .</p>
+      <img src="./ssh/1issues.PNG" alt="route -n">
+      <p>Verifica si se encuentra activa la interfaz.</p>
+<img src="./ssh/2check.PNG" alt="ping-ip">
+      <p>Verifica si se encuentra activa el gateway.</p>
+      <img src="./ssh/3check.PNG" alt="ping-gateway">
+      <p>Verifica la resolucion de nombre si esta configurado correctamente,esto puedes modificarlo en /etc/resolv.conf.</p>
+      <img src="./ssh/4ckeck.PNG" alt="">
+      <br>
+      <img src="./ssh/42check.PNG" alt="">
+      <br>
+      <img src="./ssh/43check.PNG" alt="file/etc/resolv.conf">
+    <p>Pregunta</p>
+      <p>Considere la siguiente dirección IP: 192.168.10.50, con la máscara de red 255.255.0.0. ¿Qué parte de la dirección IP es para la red y cuál es para la máquina?</p>
+  <p>Network: 192.168, machine: 10.50</p>
+  
+
+      
+      
+            
+      
     </section>
-    
   </main>
 </body>
 
