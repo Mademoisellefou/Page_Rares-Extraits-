@@ -33,6 +33,7 @@
           <li><a class="nav-link" href="#PUN">Painting en Unity</a></li>
           <!-- <li><a class="nav-link" href="#SPU">Pintando Pixeles con Unity</a></li> -->
           <li><a class="nav-link" href="#NetW">Linux: SSH servidores remotos & basicos Networks</a></li>
+          <li><a class="nav-link" href="#PostgresCI">Postgres config CodeIgnaiter</a></li>
 
         </ul>
       </nav>
@@ -733,6 +734,34 @@ grep -o -e ..:
             
       
     </section>
+      <!-- post22 -->
+      <section class="main-section" id="PostgresCI">
+        <h4>Requisitos</h4>
+        <p>Postgres y Codeiganiter</p>
+        <h4>Steps</h4>
+        <p>0. habilitar drivers</p>
+        <code>
+          //php.ini
+          extension=php_pdo_pgsql.dll
+          extension=php_pgsql.dll
+          extension="pgsql.so"
+        </code>
+        <p>
+          change permision: chown -R daemon:$USER ...., chmod -R 755 ...,chmod 777 ../writable
+        </p>
+        <p>1. configurar app/Config/Database.php</p>
+        <code>
+          DBdriver=>'Postgre',
+          port=>'5432',
+          .....
+        </code>
+        <p>2. configurar app/Config/app.php</p>
+        <code>
+          $baseURL= '../&lt;foldername&gt;'
+        </code>
+        <br>
+        <a href="https://gitlab.com/ferm/codeigniter4-tutorials-postgresql">refernce project</a>
+      </section>
   </main>
 </body>
 
